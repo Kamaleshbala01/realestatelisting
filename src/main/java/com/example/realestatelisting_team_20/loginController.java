@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,12 +25,13 @@ public class loginController implements Initializable {
     @FXML
     private TextField username;
     @FXML
-    private TextField password;
+    private PasswordField password;
     @FXML
     private Button login;
     @FXML
      private Button signup;
-    Connection con;
+    @FXML
+     private AnchorPane loginAnchor;
 
 
     public void onClickLogin(ActionEvent event){
@@ -37,40 +39,42 @@ public class loginController implements Initializable {
         ResultSet rs = null;
         Connection connection = DataBaseConnection.getConnection();
         try {
-            pst = connection.prepareStatement("SELECT* FROM user WHERE username = ? AND password_hash = ?");
-            pst.setString(1,"username");
-            pst.setString(2,"password");
+            pst = connection.prepareStatement("SELECT * FROM user WHERE userName = ? AND password_hash = ?");
+            pst.setString(1,username.getText());
+            pst.setString(2,password.getText());
             rs = pst.executeQuery();
             if(rs.next()){
-                FXMLLoader loader = new FXMLLoader(loginController.class.getResource("home.fxml"));
-                Parent root = FXMLLoader.load(Objects.requireNonNull(loginController.class.getResource("home.fxml")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setTitle("Home page...!");
-                stage.setScene(new Scene(root,600,400));
-                stage.show();
+                try{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+                    Parent root = (Parent) loader.load();
+                    Stage stage= (Stage) login.getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                }
+                catch (IOException e){
+                    System.out.println(e);
+                }
             }
             else{
                 Alert error = new Alert(Alert.AlertType.ERROR,"Invalid username/Password...!", ButtonType.OK);
                 error.show();
             }
-        } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException e) {
+               System.out.println(e);
         }
     }
     public void onClicks(ActionEvent event) {
-
-        FXMLLoader loader = new FXMLLoader(loginController.class.getResource("signup.fxml"));
-        Parent root = null;
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(loginController.class.getResource("sighup.fxml")));
-        } catch (IOException e) {
-            e.fillInStackTrace();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("signup.fxml"));
+            Parent root = (Parent) loader.load();
+            Stage stage= (Stage) signup.getScene().getWindow();
+            stage.setScene(new Scene(root));
         }
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("Sign Up...!");
-        stage.setScene(new Scene(root, 600, 400));
-        stage.show();
+        catch (IOException e){
+            System.out.println(e);
+        }
+
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
              login.setOnAction(this::onClickLogin);
