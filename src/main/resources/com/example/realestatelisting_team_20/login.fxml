@@ -10,12 +10,12 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestatelisting_team_20.loginController">
    <children>
       <Pane layoutX="-5.0" layoutY="-7.0" prefHeight="410.0" prefWidth="268.0" style="-fx-background-color: gray;" />
-      <Label layoutX="290.0" layoutY="84.0" prefHeight="26.0" prefWidth="69.0" text="UserName">
+      <Label layoutX="289.0" layoutY="57.0" prefHeight="26.0" prefWidth="69.0" text="UserName">
          <font>
             <Font name="Bodoni MT" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="username" layoutX="369.0" layoutY="84.0" prefHeight="26.0" prefWidth="207.0" promptText="username/EmailID">
+      <TextField fx:id="username" layoutX="369.0" layoutY="57.0" prefHeight="26.0" prefWidth="207.0" promptText="username/EmailID">
          <font>
             <Font size="11.0" />
          </font>
@@ -31,16 +31,23 @@
          </font>
       </TextField>
       <Label fx:id="forgetpassword" layoutX="276.0" layoutY="208.0" text="Forget Password ?" textFill="#1129e1" />
-      <Button fx:id="login" layoutX="451.0" layoutY="198.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="114.0" style="-fx-background-color: blue;" text="Login" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+      <Button fx:id="login" layoutX="451.0" layoutY="198.0" mnemonicParsing="false" onAction="#onClickLogin" prefHeight="18.0" prefWidth="114.0" style="-fx-background-color: blue;" text="Login" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
       <Label layoutX="369.0" layoutY="266.0" text="Don't have a account ?" />
-      <Button fx:id="signup" layoutX="388.0" layoutY="319.0" mnemonicParsing="false" style="-fx-background-color: blue;" text="Sign Up" textFill="WHITE">
+      <Button fx:id="signup" layoutX="388.0" layoutY="319.0" mnemonicParsing="false" onAction="#onClicks" style="-fx-background-color: blue;" text="Sign Up" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
+      <Label fx:id="lableUsername" layoutX="292.0" layoutY="91.0" prefHeight="26.0" prefWidth="286.0" textFill="#fa0000" textOverrun="CENTER_ELLIPSIS" />
+      <Label fx:id="lablePassword" layoutX="286.0" layoutY="158.0" prefHeight="26.0" prefWidth="295.0" textFill="#ff0202" />
+      <Label fx:id="lableAll" layoutX="286.0" layoutY="9.0" prefHeight="37.0" prefWidth="295.0" textFill="#d70000">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
